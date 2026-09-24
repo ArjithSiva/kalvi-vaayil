@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tamil-inspired palette: deep-indigo ink on warm off-white, with turmeric
+       gold and leaf green as accents.
+       Contrast (WCAG AA, normal text):
+         primary 243 47% 38% on white .......... 10.0:1
+         muted-foreground 243 12% 45% on white .. 5.6:1
+       The accent is turmeric gold, which CANNOT carry white text (2.2:1). Its
+       foreground is dark ink, which reaches 7.7:1. Never set accent-foreground
+       back to white. */
+    --background: 40 33% 98%;
+    --foreground: 243 30% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 243 30% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 243 30% 14%;
+    --primary: 243 47% 38%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 243 20% 95%;
+    --secondary-foreground: 243 30% 20%;
+    --muted: 40 20% 95%;
+    --muted-foreground: 243 12% 45%;
+    --accent: 38 92% 48%;
+    --accent-foreground: 243 45% 14%;
+    --success: 152 55% 34%;
+    --success-foreground: 0 0% 100%;
+    --warning: 28 92% 46%;
+    --warning-foreground: 243 45% 12%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 243 16% 88%;
+    --input: 243 16% 88%;
+    --ring: 243 47% 38%;
+    --radius: 0.875rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 243 30% 14%;
+    --sidebar-primary: 243 47% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 243 20% 95%;
+    --sidebar-accent-foreground: 243 30% 20%;
+    --sidebar-border: 243 16% 88%;
+    --sidebar-ring: 243 47% 38%;
+
+    /* Gradients stay inside the indigo -> violet -> teal family so white text
+       stays legible on every stop. Gold is decorative only (icon tiles,
+       underlines, rules) and is never used behind text. */
+    --gradient-hero: linear-gradient(135deg, hsl(243 50% 32%) 0%, hsl(258 48% 38%) 50%, hsl(190 45% 32%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(40 33% 98%) 0%, hsl(40 25% 95%) 100%);
+    --gradient-card: linear-gradient(150deg, hsl(0 0% 100%) 0%, hsl(40 30% 98%) 100%);
+    --gradient-gold: linear-gradient(120deg, hsl(38 92% 52%) 0%, hsl(28 88% 56%) 100%);
+
+    --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+    --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.03);
+    --shadow-elegant: 0 10px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+    --shadow-glow: 0 0 30px -5px hsl(var(--primary) / 0.25);
+    /* The hero gradient is dark in both themes, so text on it must stay light
+       rather than following --primary-foreground, which flips to ink in dark. */
+    --hero-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 243 32% 8%;
+    --foreground: 40 25% 96%;
+    --card: 243 26% 12%;
+    --card-foreground: 40 25% 96%;
+    --popover: 243 26% 12%;
+    --popover-foreground: 40 25% 96%;
+    --primary: 243 65% 72%;
+    /* Dark ink on the lightened indigo — white would only reach 2.1:1 here. */
+    --primary-foreground: 243 40% 12%;
+    --secondary: 243 22% 17%;
+    --secondary-foreground: 40 25% 96%;
+    --muted: 243 22% 17%;
+    --muted-foreground: 243 14% 68%;
+    --accent: 38 85% 62%;
+    --accent-foreground: 243 40% 12%;
+    --success: 152 45% 55%;
+    --success-foreground: 243 40% 12%;
+    --warning: 28 88% 60%;
+    --warning-foreground: 243 45% 12%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 243 20% 22%;
+    --input: 243 20% 22%;
+    --ring: 243 65% 72%;
+
+    --sidebar-background: 243 28% 10%;
+    --sidebar-foreground: 40 25% 96%;
+    --sidebar-primary: 243 65% 72%;
+    --sidebar-primary-foreground: 243 40% 12%;
+    --sidebar-accent: 243 22% 15%;
+    --sidebar-accent-foreground: 40 25% 96%;
+    --sidebar-border: 243 20% 22%;
+    --sidebar-ring: 243 65% 72%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(243 45% 22%) 0%, hsl(258 42% 26%) 50%, hsl(190 40% 20%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(243 32% 8%) 0%, hsl(243 28% 11%) 100%);
+    --gradient-card: linear-gradient(150deg, hsl(243 26% 12%) 0%, hsl(243 26% 15%) 100%);
+    --gradient-gold: linear-gradient(120deg, hsl(38 85% 56%) 0%, hsl(28 80% 58%) 100%);
+
+    --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.3);
+    --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.35), 0 2px 4px -2px rgb(0 0 0 / 0.25);
+    --shadow-elegant: 0 10px 25px -5px rgb(0 0 0 / 0.45);
+    --shadow-glow: 0 0 30px -5px hsl(var(--primary) / 0.3);
+    --hero-foreground: 0 0% 100%;
+  }
+
+  /* Native date/time pickers and <select> popups follow the active theme. */
+  :root { color-scheme: light; }
+  .dark { color-scheme: dark; }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', 'Noto Sans Tamil', 'Latha', 'Nirmala UI', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  /* Grid and flex children default to min-width: auto, which lets long Tamil
+     words push a column wider than its track. Zeroing it is what actually
+     prevents horizontal overflow — no overflow: hidden required. */
+  [class*="grid"] > *,
+  [class*="flex"] > * {
+    min-width: 0;
+  }
+
+  /* ── Tamil typography ────────────────────────────────────────────────────
+     Every :lang(ta) rule lives inside @layer base on purpose. Unlayered CSS is
+     emitted AFTER Tailwind's utilities, so a bare `:lang(ta) h1 { font-size }`
+     silently beat `text-4xl sm:text-6xl` and collapsed the hero whenever Tamil
+     was active. Sizing stays with the utilities; only wrapping, line-height and
+     letter-spacing are set here, and they apply to Latin text too so switching
+     language never reflows the layout. */
+  :lang(ta),
+  [data-lang="ta"] {
+    line-height: 1.7;
+    letter-spacing: 0;
+    overflow-wrap: break-word;
+  }
+
+  /* Negative tracking is tuned for Latin and crowds Tamil vowel signs. */
+  :lang(ta) h1, :lang(ta) h2, :lang(ta) h3,
+  :lang(ta) h4, :lang(ta) h5, :lang(ta) h6 {
+    letter-spacing: 0;
+    line-height: 1.4;
+    overflow-wrap: break-word;
+  }
+
+  /* Tamil words are longer than their English counterparts, so interactive
+     labels must wrap instead of being clipped by whitespace-nowrap. */
+  :lang(ta) button,
+  :lang(ta) [role="tab"],
+  :lang(ta) [role="button"],
+  :lang(ta) label {
+    white-space: normal;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+  }
+
+  :lang(ta) td,
+  :lang(ta) th,
+  :lang(ta) li,
+  :lang(ta) p {
+    overflow-wrap: break-word;
+  }
+
+  /* Comfortable touch targets and 16px inputs on touch devices, in every
+     language — making these Tamil-only is what used to shift the layout when
+     the language changed. */
+  @media (pointer: coarse) {
+    button,
+    [role="tab"],
+    [role="button"] {
+      min-height: 2.75rem;
+    }
+
+    input,
+    textarea,
+    select {
+      font-size: 1rem;
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════
+   LAYOUT RESET
+   `overflow-x: clip` (not `hidden`) contains any
+   accidental overflow WITHOUT creating a scroll
+   container. `hidden` computes the other axis to
+   `auto`, which turned #root into a scrollport and
+   broke every `position: sticky` descendant.
+   ══════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+@layer components {
+  .kv-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .kv-section {
+    @apply py-6 sm:py-10 lg:py-14;
+  }
+
+  .kv-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+  }
+
+  /* Horizontal scroll for wide tables on narrow screens. */
+  .kv-scroll-x {
+    @apply w-full overflow-x-auto overscroll-x-contain;
+  }
+}
+
+@layer utilities {
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+
+  .gradient-hero { background-image: var(--gradient-hero); }
+  .gradient-subtle { background-image: var(--gradient-subtle); }
+  .gradient-card { background-image: var(--gradient-card); }
+  .gradient-gold { background-image: var(--gradient-gold); }
+
+  .text-gradient {
+    background-image: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glassmorphic chrome for headers and overlays. */
+  .kv-glass {
+    background-color: hsl(var(--card) / 0.72);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+}

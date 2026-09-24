@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: kalvi-vaayil-backend
+    env: node
+    region: mumbai
+    plan: free
+    branch: main
+    rootDir: server
+    # Clear any lockfile that may have been committed into server/ before
+    # installing. A lockfile that has drifted out of sync with package.json is
+    # what makes npm's Arborist crash with
+    # "Cannot read properties of null (reading 'matches')".
+    buildCommand: rm -f package-lock.json pnpm-lock.yaml yarn.lock && npm install --no-audit --no-fund
+    startCommand: node src/index.js
+    healthCheckPath: /api/health
+    envVars:
+      # Pins the runtime Render builds and runs this service with.
+      - key: NODE_VERSION
+        value: 22
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: GROQ_API_KEY
+        sync: false
+      - key: AI_MODEL
+        value: qwen/qwen3.8-27b
+      - key: AI_FALLBACK_MODEL
+        value: openai/gpt-oss-120b
+      # Comma-separated list, e.g. "https://kalvi-vaayil.vercel.app,https://kalvi-vaayil-git-main.vercel.app"
+      - key: CLIENT_URL
+        sync: false
